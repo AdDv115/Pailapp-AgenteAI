@@ -1,3 +1,5 @@
+// Prompt de lógica (thinking): le dice al modelo cómo pensar y estructurar la respuesta
+
 export const pLogica = `
 PLAN:
 - Identifica la intencion del usuario: Saludo, Peticion de receta, Busqueda por caracteristicas, 
