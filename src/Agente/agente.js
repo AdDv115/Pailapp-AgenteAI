@@ -1,20 +1,35 @@
 import { ai } from "../config/gemini.js";
 import { pSistema } from "../prompts/pSistema.js";
 import { pLogica } from "../prompts/pLogica.js";
+import { pRules } from "../prompts/pRules.js";
 
-export async function Agente(mensajeUser) {
+export async function Agente(mensajeUser, tipoUsuario = "free", historial = [], esPrimeraCharla = false) {
+  const modelo = "gemini-3-flash-preview";
+
+  const historialTexto = historial.slice(-8).map(msg => 
+    `[${msg.role.toUpperCase()}] ${msg.content}`
+  ).join("\n\n");
+
+  const contexto = esPrimeraCharla 
+    ? "PRIMERA CHARLA: incluye saludo rolo" 
+    : "CONTINÚA: directo sin saludo";
+
   const prompt = `
-[SISTEMA]
-${pSistema}
+[SISTEMA] ${pSistema}
 
-[USUARIO]
-${mensajeUser}
+[RULES] ${pRules}
 
-${pLogica}
+[CONTEXTO] ${contexto}
+
+[HISTORIAL] ${historialTexto || "Charla nueva"}
+
+[USUARIO] ${mensajeUser}
+
+[LOGICA] ${pLogica}
 `;
 
   const respuesta = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: modelo,
     contents: [{ role: "user", parts: [{ text: prompt }] }],
   });
 
