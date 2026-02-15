@@ -1,6 +1,6 @@
 import "dotenv/config"; // Carga variables de entorno desde .env
 import readline from "readline"; // Módulo estándar para leer de la terminal
-import { Agente } from "./Agente/agente.js";
+import { Agente } from "./src/Agente/agente.js";
 
 // Creamos interfaz de lectura/escritura por consola
 const rl = readline.createInterface({

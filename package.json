@@ -5,15 +5,20 @@
   "license": "ISC",
   "author": "Brandon Melendez",
   "type": "module",
-  "main": "src/main.js",
+  "main": "src/server/api.js",
   "scripts": {
-    "start": "node src/main.js",
+    "start": "node src/server/api.js",
+    "dev:frontend": "serve frontend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@google/genai": "^1.41.0",
     "cors": "^2.8.6",
     "dotenv": "^17.2.4",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "mongodb": "^7.1.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.5"
   }
 }
